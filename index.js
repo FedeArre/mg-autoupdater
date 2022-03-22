@@ -1,7 +1,7 @@
 const dotenv = require('dotenv');
 
 const discordJs = require('./discord_js_setup');
-const backend = require('./backend/api');
+const express_handler = require('./backend/express_handler');
 
 // .env config
 dotenv.config();
