@@ -1,59 +1,112 @@
 const mysql = require('mysql');
 
 let connection = null;
+let db = {};
 
-exports.setupDatabaseConnection = function(host, username, password, database_name) {
-	connection = mysql.createConnection({
+db.setupDatabaseConnection = function(host, username, password, database_name) {
+	connection = mysql.createPool({
+		connectionLimit: 50,
 		host: host,
 		user: username,
 		password: password,
 		database: database_name
 	});
+	console.log("MySQL connection setup");
 };
 
-exports.startDatabaseConnection = function() {
-	connection.connect(function(err) {
-		if(err){
-			console.log("A fatal error when trying to start the database connection.");
-			console.log(err.code);
-			console.log(err.fatal);
-		} else {
-			console.log("MySQL connection has been succesful");
-		}
-	});
-}
+db.exposeCurrentPool = () => { return connection; }
 
-// Posible return codes:
-//  1 = Succesful.
-//  0 = MySQL error
-// -1 = Invalid string.
-// -2 = Mod id is already used.
-exports.addNewMod = function(modId, modName, version, downloadLink){
-	if(isEmpty(modId) || isEmpty(modName) || isEmpty(version) || isEmpty(downloadLink))
-		return -1;
-	
-	// We first check if the mod does not exist.
-	connection.query("SELECT COUNT(mods.internal_id) FROM mods WHERE mods.mod_id = ?", [modId], (err, result) => {
-		if(err){
-			console.log("An error has ocurred while trying to check for internal_id duplicates.");
-			console.log(err);
-		} else {
-			result = JSON.parse(JSON.stringify(result));
-
-			if(result["COUNT(mods.internal_id)"] != 0){
-				return -2; // A copy exists, return -2.
+db.addNewMod = function(modId, modName, version, downloadLink, discordName){
+	return new Promise((resolve, reject) => {
+		connection.query("INSERT INTO mods(mod_id, mod_name, current_version, current_download_link, created_by, last_update) VALUES (?, ?, ?, ?, ?, ?)", 
+		[modId, modName,version, downloadLink, discordName, new Date()], function(error, result){
+			if(!error)
+			{
+				connection.query("INSERT INTO mods_download(mod_id, version, downloadCounter) VALUES(?, ?, 0)", [result.insertId, version], function (error2, result2){
+					if(error)
+						reject(error);
+					else
+						resolve(true);
+				});
 			}
-		}
+			else
+			{
+				reject(error);
+			}
+		});
 	});
-
-	//TODO: URL check.
-	
-	// We now try to add the mod.
-
-	return 1;
 }
 
-
-function isEmpty(value) {
-	return typeof value == 'string' && !value.trim() || typeof value == 'undefined' || value === null;
+db.doesModExist = function(modId){
+	return new Promise((resolve, reject) => {
+		connection.query("SELECT mods.internal_id FROM mods WHERE mods.mod_id = ?", [modId], function(error, result) {
+			if(!error)
+			{
+				resolve(result);
+			} 
+			else 
+			{
+				reject(error);
+			}
+		});
+	});
 }
+
+db.updateMod = function(modId, newVersion, newDownloadLink){
+	return new Promise((resolve, reject) => {
+		connection.query("UPDATE mods SET current_version = ?, current_download_link = ? WHERE mod_id = ?", [newVersion, newDownloadLink, modId], function(error, result){
+			if(!error)
+			{
+				resolve(result);
+			}
+			else
+			{
+				reject(error);
+			}
+		});
+	});
+}
+
+db.updateModDownloads = function(internal_mod_id, newVersion){
+	return new Promise((resolve, reject) => {
+		connection.query("INSERT INTO mods_download VALUES (?, ?, 0)", [internal_mod_id, newVersion], function(error, result){
+			if(!error)
+			{
+				resolve(result);
+			}
+			else
+			{
+				reject(error);
+			}
+		});
+	});
+}
+
+db.getModData = function(modId){
+	return new Promise((resolve, reject) => {
+		connection.query("SELECT * FROM mods WHERE mod_id = ?", [modId], function(error, result, fields){
+			if(!error)
+			{
+				result = JSON.parse(JSON.stringify(result));
+				resolve(result[0]);
+			}
+			else
+			{
+				reject(error);
+			}
+		});
+	});
+}
+
+db.telemetryHello = function(){
+	return new Promise((resolve, reject) => {
+		connection.query("UPDATE telemetry SET counter = counter + 1 WHERE type = ?", ["hello"], function(error, result){
+			if(error)
+				reject(error);
+			else
+				resolve(result);
+		});
+	});
+}
+
+module.exports = db;
