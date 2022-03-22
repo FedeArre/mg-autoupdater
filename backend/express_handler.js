@@ -1,6 +1,7 @@
 const express = require('express');
 const api = require('./api');
-const { getModData } = require('./database');
+const { getModData, telemetryHello, updateDownloadCounter } = require('./database');
+const rateLimit = require("express-rate-limit");
 
 // Basic setup
 const app = express();
@@ -17,25 +18,51 @@ app.post('/mods', async(request, response) => {
     }
 
     let modsRequiringUpdate = [];
+    try
+    {
 
-    for(let i = 0; i < modList["mods"].length; i++){
-        let data = await getModData(modList["mods"][i]["modId"]);
-
-        if(data === undefined)
-            continue;
-
+        for(let i = 0; i < modList["mods"].length; i++){
+            let data = await getModData(modList["mods"][i]["modId"]);
     
-        if(data["current_version"] != modList["mods"][i]["version"])
-        {
-            modsRequiringUpdate.push(data);
+            if(data === undefined)
+                continue;
+    
+        
+            if(data["current_version"] != modList["mods"][i]["version"])
+            {
+                modsRequiringUpdate.push(data);
+            }
         }
-    }
 
-    response.send(modsRequiringUpdate);
+        telemetryHello();
+        response.send(modsRequiringUpdate);
+    }
+    catch(error){
+        console.log("An issue ocurred on /mods API.");
+        console.log(error);
+        response.sendStatus(500);
+    }
 });
 
-app.post("/mod_download", function(request, response){
+app.post("/mod_download", async(request, response) => {
     let mod = request.body;
+    if(mod === undefined || mod["mod_id"] === undefined){
+        response.sendStatus(400);
+        return;
+    }
 
-    response.sendStatus(200);
+    try {
+        let data = await getModData(mod["mod_id"]);
+        if(data === undefined){
+            response.sendStatus(400);
+            return;
+        }
+
+        updateDownloadCounter(data["internal_mod_id"], data["current_version"]);
+        response.send(data["current_download_link"]);
+    } catch(error){
+        console.log("An issue ocurred on /mod_download API.");
+        console.log(error);
+        response.sendStatus(500);
+    }
 });

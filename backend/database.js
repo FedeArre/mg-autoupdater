@@ -98,14 +98,21 @@ db.getModData = function(modId){
 	});
 }
 
-db.telemetryHello = function(){
-	return new Promise((resolve, reject) => {
-		connection.query("UPDATE telemetry SET counter = counter + 1 WHERE type = ?", ["hello"], function(error, result){
-			if(error)
-				reject(error);
-			else
-				resolve(result);
-		});
+db.telemetryHello = function () {
+	connection.query("UPDATE telemetry SET counter = counter + 1 WHERE type = ?", ["hello"], function (error, result) {
+		if (error) {
+			console.log("Error with telemetry hello.");
+			console.log(error);
+		}
+	});
+}
+
+db.updateDownloadCounter = function(internal_mod_id, current_version) {
+	connection.query("UPDATE mods_download SET downloadCounter = downloadCounter + 1 WHERE mod_id = ? AND version = ?", [internal_mod_id, current_version], function (error, result) {
+		if (error){
+			console.log("Error while updating download counter.");
+			console.log(error);
+		}
 	});
 }
 
