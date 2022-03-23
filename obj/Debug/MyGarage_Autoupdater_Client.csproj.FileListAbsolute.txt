@@ -1,0 +1,11 @@
+C:\Users\Federico\Source\Repos\mg-autoupdater\obj\Debug\MyGarage_Autoupdater_Client.csproj.AssemblyReference.cache
+C:\Users\Federico\Source\Repos\mg-autoupdater\obj\Debug\MyGarage_Autoupdater_Client.csproj.SuggestedBindingRedirects.cache
+C:\Users\Federico\Source\Repos\mg-autoupdater\obj\Debug\MyGarage_Autoupdater_Client.Properties.Resources.resources
+C:\Users\Federico\Source\Repos\mg-autoupdater\obj\Debug\MyGarage_Autoupdater_Client.csproj.GenerateResource.cache
+C:\Users\Federico\Source\Repos\mg-autoupdater\obj\Debug\MyGarage_Autoupdater_Client.csproj.CoreCompileInputs.cache
+C:\Users\Federico\Source\Repos\mg-autoupdater\bin\Debug\MyGarage_Autoupdater_Client.exe.config
+C:\Users\Federico\Source\Repos\mg-autoupdater\bin\Debug\MyGarage_Autoupdater_Client.exe
+C:\Users\Federico\Source\Repos\mg-autoupdater\bin\Debug\MyGarage_Autoupdater_Client.pdb
+C:\Users\Federico\Source\Repos\mg-autoupdater\obj\Debug\MyGarage_Autoupdater_Client.MainForm.resources
+C:\Users\Federico\Source\Repos\mg-autoupdater\obj\Debug\MyGarage_Autoupdater_Client.exe
+C:\Users\Federico\Source\Repos\mg-autoupdater\obj\Debug\MyGarage_Autoupdater_Client.pdb
