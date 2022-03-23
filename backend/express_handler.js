@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 app.listen(3000);
 
-// This method gets a list of mods ()
+// This method gets a list of mods
 app.post('/mods', async(request, response) => {
     let modList = request.body;
     if(modList === undefined || modList["mods"] === undefined)
