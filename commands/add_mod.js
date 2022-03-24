@@ -8,7 +8,8 @@ module.exports = {
 		.addStringOption(option => option.setName("mod_name").setDescription("The name of the mod").setRequired(true))
         .addStringOption(option => option.setName("mod_id").setDescription("The mod ID of the mod. Has to be the same as the ID on the Mod assembly!").setRequired(true))
         .addStringOption(option => option.setName("version").setDescription("The current version of the mod. Has to be identical as the one in the Mod assembly!").setRequired(true))
-        .addStringOption(option => option.setName("download_link").setDescription("The direct download link for the mod.").setRequired(true)),
+        .addStringOption(option => option.setName("download_link").setDescription("The direct download link for the mod.").setRequired(true))
+        .addStringOption(option => option.setName("file_name").setDescription("The file name of your mod. You have to include the extension.").setRequired(true)),
 
 	async execute(interaction) {
         await interaction.deferReply();
@@ -24,8 +25,9 @@ module.exports = {
         let mod_name = interaction.options.getString("mod_name");
         let version = interaction.options.getString("version");
         let download_link = interaction.options.getString("download_link");
-
-        let result = await addNewMod(mod_id, mod_name, version, download_link, interaction.user.id);
+        let file_name = interaction.options.getString("file_name");
+        
+        let result = await addNewMod(mod_id, mod_name, version, download_link, file_name, interaction.user.id);
 
         if(result === true){
             await interaction.editReply(`${mod_id} was succesfully added into the database.`);

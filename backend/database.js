@@ -16,10 +16,10 @@ db.setupDatabaseConnection = function(host, username, password, database_name) {
 
 db.exposeCurrentPool = () => { return connection; }
 
-db.addNewMod = function(modId, modName, version, downloadLink, discordName){
+db.addNewMod = function(modId, modName, version, downloadLink, file_name, discordName){
 	return new Promise((resolve, reject) => {
-		connection.query("INSERT INTO mods(mod_id, mod_name, current_version, current_download_link, created_by, last_update) VALUES (?, ?, ?, ?, ?, ?)", 
-		[modId, modName,version, downloadLink, discordName, new Date()], function(error, result){
+		connection.query("INSERT INTO mods(mod_id, mod_name, current_version, current_download_link, file_name, created_by, last_update) VALUES (?, ?, ?, ?, ?, ?, ?)", 
+		[modId, modName, version, downloadLink, file_name, discordName, new Date()], function(error, result){
 			if(!error)
 			{
 				connection.query("INSERT INTO mods_download(mod_id, version, downloadCounter) VALUES(?, ?, 0)", [result.insertId, version], function (error2, result2){

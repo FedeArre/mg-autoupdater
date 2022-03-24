@@ -46,6 +46,7 @@ app.post('/mods', async(request, response) => {
 });
 
 app.post("/mod_download", async(request, response) => {
+    console.log(request.body);
     let mod = request.body;
     if(mod === undefined || mod["mod_id"] === undefined){
         response.sendStatus(400);
