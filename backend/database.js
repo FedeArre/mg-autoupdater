@@ -99,7 +99,7 @@ db.getModData = function(modId){
 }
 
 db.telemetryHello = function () {
-	connection.query("UPDATE telemetry SET counter = counter + 1 WHERE type = ?", ["hello"], function (error, result) {
+	connection.query("UPDATE telemetry SET count = count + 1 WHERE type = ?", ["hello"], function (error, result) {
 		if (error) {
 			console.log("Error with telemetry hello.");
 			console.log(error);

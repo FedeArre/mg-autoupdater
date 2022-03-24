@@ -11,6 +11,7 @@ app.listen(3000);
 // This method gets a list of mods
 app.post('/mods', async(request, response) => {
     let modList = request.body;
+
     if(modList === undefined || modList["mods"] === undefined)
     {
         response.sendStatus(400);
@@ -20,7 +21,6 @@ app.post('/mods', async(request, response) => {
     let modsRequiringUpdate = [];
     try
     {
-
         for(let i = 0; i < modList["mods"].length; i++){
             let data = await getModData(modList["mods"][i]["modId"]);
     
@@ -37,6 +37,7 @@ app.post('/mods', async(request, response) => {
         telemetryHello();
         response.send(modsRequiringUpdate);
     }
+
     catch(error){
         console.log("An issue ocurred on /mods API.");
         console.log(error);
@@ -58,7 +59,7 @@ app.post("/mod_download", async(request, response) => {
             return;
         }
 
-        updateDownloadCounter(data["internal_mod_id"], data["current_version"]);
+        updateDownloadCounter(data["internal_id"], data["current_version"]);
         response.send(data["current_download_link"]);
     } catch(error){
         console.log("An issue ocurred on /mod_download API.");
