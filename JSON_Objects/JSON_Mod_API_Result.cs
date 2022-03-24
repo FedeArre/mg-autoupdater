@@ -14,6 +14,7 @@ namespace MyGarage_Autoupdater_Client.JSON_Objects
         public string current_version { get; set; }
         public string current_download_link { get; set; }
         public string created_by { get; set; }
+        public string file_name { get; set; }
         public DateTime last_update { get; set; }
     }
 }

@@ -32,7 +32,6 @@ namespace MyGarage_Autoupdater_Client
 
         public List<JSON_Mod_API_Result> GetUpdates(List<ModWrapper> modList)
         {
-            List<string> updates = new List<string>();
             JSON_ModList jsonList = new JSON_ModList();
 
             foreach(ModWrapper mod in modList)
@@ -72,9 +71,9 @@ namespace MyGarage_Autoupdater_Client
             }
         }
 
-        public List<string> GetDownloadLinks(List<JSON_Mod_API_Result> mods)
+        public List<DownloadData> GetDownloadLinks(List<JSON_Mod_API_Result> mods)
         {
-            List<string> links = new List<string>();
+            List<DownloadData> links = new List<DownloadData>();
 
             foreach(JSON_Mod_API_Result mod in mods)
             {
@@ -95,7 +94,7 @@ namespace MyGarage_Autoupdater_Client
                     {
                         var result = streamReader.ReadToEnd();
 
-                        links.Add(result);
+                        links.Add(new DownloadData(mod.mod_name, result, mod.file_name));
                     }
                 } 
                 catch(Exception ex)

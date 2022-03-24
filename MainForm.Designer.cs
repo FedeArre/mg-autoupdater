@@ -42,7 +42,7 @@
             this.txt_status.Name = "txt_status";
             this.txt_status.Size = new System.Drawing.Size(159, 20);
             this.txt_status.TabIndex = 0;
-            this.txt_status.Text = "All mods are up to date";
+            this.txt_status.Text = "Status has not changed yet";
             // 
             // label1
             // 

@@ -1,0 +1,17 @@
+F:\Programacion My Garage\New docs\mg-autoupdater\obj\x86\Debug\My_Garage_Autoupdater.csproj.AssemblyReference.cache
+F:\Programacion My Garage\New docs\mg-autoupdater\obj\x86\Debug\MyGarage_Autoupdater_Client.MainForm.resources
+F:\Programacion My Garage\New docs\mg-autoupdater\obj\x86\Debug\My_Garage_Autoupdater.Properties.Resources.resources
+F:\Programacion My Garage\New docs\mg-autoupdater\obj\x86\Debug\My_Garage_Autoupdater.csproj.GenerateResource.cache
+F:\Programacion My Garage\New docs\mg-autoupdater\obj\x86\Debug\My_Garage_Autoupdater.csproj.CoreCompileInputs.cache
+F:\Programacion My Garage\New docs\mg-autoupdater\bin\Debug\WindowsApplication.exe.config
+F:\Programacion My Garage\New docs\mg-autoupdater\bin\Debug\WindowsApplication.exe
+F:\Programacion My Garage\New docs\mg-autoupdater\bin\Debug\WindowsApplication.pdb
+F:\Programacion My Garage\New docs\mg-autoupdater\bin\Debug\Assembly-CSharp.dll
+F:\Programacion My Garage\New docs\mg-autoupdater\bin\Debug\Newtonsoft.Json.dll
+F:\Programacion My Garage\New docs\mg-autoupdater\bin\Debug\Newtonsoft.Json.xml
+F:\Programacion My Garage\New docs\mg-autoupdater\obj\x86\Debug\My_Garage_Autoupdater.csproj.CopyComplete
+F:\Programacion My Garage\New docs\mg-autoupdater\obj\x86\Debug\WindowsApplication.exe
+F:\Programacion My Garage\New docs\mg-autoupdater\obj\x86\Debug\WindowsApplication.pdb
+F:\SteamLibrary\steamapps\common\My Garage\Mods\Autoupdater\WindowsApplication.exe.config
+F:\SteamLibrary\steamapps\common\My Garage\Mods\Autoupdater\WindowsApplication.exe
+F:\SteamLibrary\steamapps\common\My Garage\Mods\Autoupdater\WindowsApplication.pdb

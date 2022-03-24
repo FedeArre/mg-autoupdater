@@ -1,0 +1,159 @@
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{46E6CD7E-6A19-4FF7-A10C-E69EDF575976}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>WindowsApplication</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\SteamLibrary\steamapps\common\My Garage\Mods\Autoupdater\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>My_Garage_Autoupdater</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\..\SteamLibrary\steamapps\common\My Garage\Mods\Autoupdater\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\SteamLibrary\steamapps\common\My Garage\Mods\Autoupdater\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="APIWrapper.cs" />
+    <Compile Include="DownloadData.cs" />
+    <Compile Include="JSON_Objects\JSON_Mod.cs" />
+    <Compile Include="JSON_Objects\JSON_ModList.cs" />
+    <Compile Include="JSON_Objects\JSON_Mod_API_Result.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModWrapper.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs" />
+    <Compile Include="Properties\Settings.Designer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".git\COMMIT_EDITMSG" />
+    <None Include=".git\config" />
+    <None Include=".git\description" />
+    <None Include=".git\HEAD" />
+    <None Include=".git\hooks\applypatch-msg.sample" />
+    <None Include=".git\hooks\commit-msg.sample" />
+    <None Include=".git\hooks\fsmonitor-watchman.sample" />
+    <None Include=".git\hooks\post-update.sample" />
+    <None Include=".git\hooks\pre-applypatch.sample" />
+    <None Include=".git\hooks\pre-commit.sample" />
+    <None Include=".git\hooks\pre-merge-commit.sample" />
+    <None Include=".git\hooks\pre-push.sample" />
+    <None Include=".git\hooks\pre-rebase.sample" />
+    <None Include=".git\hooks\pre-receive.sample" />
+    <None Include=".git\hooks\prepare-commit-msg.sample" />
+    <None Include=".git\hooks\push-to-checkout.sample" />
+    <None Include=".git\hooks\update.sample" />
+    <None Include=".git\index" />
+    <None Include=".git\info\exclude" />
+    <None Include=".git\logs\HEAD" />
+    <None Include=".git\logs\refs\heads\client" />
+    <None Include=".git\logs\refs\remotes\origin\client" />
+    <None Include=".git\logs\refs\remotes\origin\HEAD" />
+    <None Include=".git\objects\07\3ab0c8b2b3fc5316ea2a84e3992e3d3ab82e81" />
+    <None Include=".git\objects\10\2f159f0d122dd98d0b5e88206f98d5722a033a" />
+    <None Include=".git\objects\1b\af22114152cbd05777adb6897bb689fb86b79d" />
+    <None Include=".git\objects\1e\122aaf49e9877b412b6ac0bb759ee1e9bc8258" />
+    <None Include=".git\objects\38\aa6536d02e8b4822ebd7702d45493646daf667" />
+    <None Include=".git\objects\43\6187e8ecbf8c30f7ee4931ee9613b272c07210" />
+    <None Include=".git\objects\51\f6223f95bec2385b609eb99b125f45cfc82555" />
+    <None Include=".git\objects\57\07be468f6e54dc042a3e7d6f8d8502e2bfcd67" />
+    <None Include=".git\objects\59\c617697e5595e6c7a257e4c0d1120b37d4cbf5" />
+    <None Include=".git\objects\5e\51950d87b417aa4a4f9ea80ba33fe17808b13d" />
+    <None Include=".git\objects\5f\fcdf03ab4e61aa61c8036353cfdd4814a040f0" />
+    <None Include=".git\objects\69\aabf6331e1a7aed94fa2e58e146995eb1dc3cc" />
+    <None Include=".git\objects\6c\701faf3bdfdedcfe1dec2f7fab393feaed56f5" />
+    <None Include=".git\objects\85\3ca6e1142f28b0373224c24d49f131a4a3c82c" />
+    <None Include=".git\objects\87\e3b28d9c778962607601905f0d018fef2fbefc" />
+    <None Include=".git\objects\92\6f3c538e102e8fb4d50e37e628d06a9e955b1f" />
+    <None Include=".git\objects\93\5a9fbe32a6f1e82e0bc8d6669ddfc0a80e8aff" />
+    <None Include=".git\objects\96\abcab0efc3394d241411dfaae432e7afb145d4" />
+    <None Include=".git\objects\9e\059a68c89fee088cd57c4355aefb160e8bedb5" />
+    <None Include=".git\objects\ae\69cd826bb95c620ac222f4eb689bc2c3977215" />
+    <None Include=".git\objects\b2\ec10437548efe2c640d2b06810bc4e80e62bdb" />
+    <None Include=".git\objects\c0\ba646b3494d27c02772b39403852cd7feec465" />
+    <None Include=".git\objects\c4\821eab9690321ddba871599053db8ce9881947" />
+    <None Include=".git\objects\c5\221323dd569082d42d40074ae495bf8148d42e" />
+    <None Include=".git\objects\cb\7150c7f9be3156fa5312d3671be88a853bb9f6" />
+    <None Include=".git\objects\cb\b2e6a7c661dbab9a05328e28119c966195247c" />
+    <None Include=".git\objects\d3\c830cc91385f2983fcd1c0f8ff0fac944a89bc" />
+    <None Include=".git\objects\da\a2f18de1d44b0e21df4729e4da3c90a8e11f3c" />
+    <None Include=".git\objects\e0\9c6120e42eca12049242eacfd856f65bfdec1f" />
+    <None Include=".git\objects\f7\32cd67d243775a897dc429c29f4dff0795f0a3" />
+    <None Include=".git\objects\fe\ce9b97a95e12e40c231e5dc2ff233dfd8a4263" />
+    <None Include=".git\objects\pack\pack-cf555d039d6cc9465a5365259aadf54b83e793aa.idx" />
+    <None Include=".git\objects\pack\pack-cf555d039d6cc9465a5365259aadf54b83e793aa.pack" />
+    <None Include=".git\packed-refs" />
+    <None Include=".git\refs\heads\client" />
+    <None Include=".git\refs\remotes\origin\client" />
+    <None Include=".git\refs\remotes\origin\HEAD" />
+    <None Include=".vs\mg-autoupdater\project-colors.json" />
+    <None Include=".vs\mg-autoupdater\v17\.suo" />
+    <None Include=".vs\slnx.sqlite" />
+    <None Include=".vs\VSWorkspaceState.json" />
+    <None Include="App.config" />
+    <None Include="JSON_Objects\NewFile" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include=".git\objects\info\" />
+    <Folder Include=".git\refs\tags\" />
+    <Folder Include=".vs\My_Garage_Autoupdater\v17\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
+  <ProjectExtensions>
+    <VisualStudio AllowExistingFolder="true" />
+  </ProjectExtensions>
+</Project>
