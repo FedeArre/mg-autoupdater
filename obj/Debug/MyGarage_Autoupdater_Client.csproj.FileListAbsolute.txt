@@ -1,11 +1,15 @@
-C:\Users\Federico\Source\Repos\mg-autoupdater\obj\Debug\MyGarage_Autoupdater_Client.csproj.AssemblyReference.cache
-C:\Users\Federico\Source\Repos\mg-autoupdater\obj\Debug\MyGarage_Autoupdater_Client.csproj.SuggestedBindingRedirects.cache
-C:\Users\Federico\Source\Repos\mg-autoupdater\obj\Debug\MyGarage_Autoupdater_Client.Properties.Resources.resources
-C:\Users\Federico\Source\Repos\mg-autoupdater\obj\Debug\MyGarage_Autoupdater_Client.csproj.GenerateResource.cache
-C:\Users\Federico\Source\Repos\mg-autoupdater\obj\Debug\MyGarage_Autoupdater_Client.csproj.CoreCompileInputs.cache
-C:\Users\Federico\Source\Repos\mg-autoupdater\bin\Debug\MyGarage_Autoupdater_Client.exe.config
-C:\Users\Federico\Source\Repos\mg-autoupdater\bin\Debug\MyGarage_Autoupdater_Client.exe
-C:\Users\Federico\Source\Repos\mg-autoupdater\bin\Debug\MyGarage_Autoupdater_Client.pdb
-C:\Users\Federico\Source\Repos\mg-autoupdater\obj\Debug\MyGarage_Autoupdater_Client.MainForm.resources
-C:\Users\Federico\Source\Repos\mg-autoupdater\obj\Debug\MyGarage_Autoupdater_Client.exe
-C:\Users\Federico\Source\Repos\mg-autoupdater\obj\Debug\MyGarage_Autoupdater_Client.pdb
+C:\Users\Federico\Source\Repos\MyGarage_Autoupdater_Client\bin\Debug\MyGarage_Autoupdater_Client.exe.config
+C:\Users\Federico\Source\Repos\MyGarage_Autoupdater_Client\bin\Debug\MyGarage_Autoupdater_Client.exe
+C:\Users\Federico\Source\Repos\MyGarage_Autoupdater_Client\bin\Debug\MyGarage_Autoupdater_Client.pdb
+C:\Users\Federico\Source\Repos\MyGarage_Autoupdater_Client\obj\Debug\MyGarage_Autoupdater_Client.csproj.SuggestedBindingRedirects.cache
+C:\Users\Federico\Source\Repos\MyGarage_Autoupdater_Client\obj\Debug\MyGarage_Autoupdater_Client.Properties.Resources.resources
+C:\Users\Federico\Source\Repos\MyGarage_Autoupdater_Client\obj\Debug\MyGarage_Autoupdater_Client.csproj.GenerateResource.cache
+C:\Users\Federico\Source\Repos\MyGarage_Autoupdater_Client\obj\Debug\MyGarage_Autoupdater_Client.csproj.CoreCompileInputs.cache
+C:\Users\Federico\Source\Repos\MyGarage_Autoupdater_Client\obj\Debug\MyGarage_Autoupdater_Client.exe
+C:\Users\Federico\Source\Repos\MyGarage_Autoupdater_Client\obj\Debug\MyGarage_Autoupdater_Client.pdb
+F:\SteamLibrary\steamapps\common\My Garage\Mods\Autoupdater\MyGarage_Autoupdater_Client.exe.config
+F:\SteamLibrary\steamapps\common\My Garage\Mods\Autoupdater\MyGarage_Autoupdater_Client.exe
+F:\SteamLibrary\steamapps\common\My Garage\Mods\Autoupdater\MyGarage_Autoupdater_Client.pdb
+C:\Users\Federico\Source\Repos\MyGarage_Autoupdater_Client\obj\Debug\MyGarage_Autoupdater_Client.csproj.AssemblyReference.cache
+C:\Users\Federico\Source\Repos\MyGarage_Autoupdater_Client\obj\Debug\MyGarage_Autoupdater_Client.MainForm.resources
+C:\Users\Federico\Source\Repos\MyGarage_Autoupdater_Client\obj\Debug\MyGarage_Autoupdater_Client.csproj.CopyComplete
