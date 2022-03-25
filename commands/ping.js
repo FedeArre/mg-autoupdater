@@ -5,6 +5,7 @@ module.exports = {
 		.setName('ping')
 		.setDescription('Returns the current ping of the bot.'),
 	async execute(interaction) {
-		return interaction.reply(`Current ping is ${client.ws.ping}ms.`);
+        const sent = await interaction.reply({ content: 'Pinging...', fetchReply: true });
+        interaction.editReply(`Current backend server ping: ${sent.createdTimestamp - interaction.createdTimestamp}ms (High values may be a Discord API issue).`);
 	},
 };
