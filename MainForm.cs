@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
+using System.Diagnostics;
 
 namespace MyGarage_Autoupdater_Client
 {
@@ -57,14 +58,21 @@ namespace MyGarage_Autoupdater_Client
                             {
                                 if (modType.IsAssignableFrom(types[j]))
                                 {
-                                    Mod m = (Mod)FormatterServices.GetUninitializedObject(types[j]);
+                                    try
+                                    {
+                                        Mod m = (Mod)FormatterServices.GetUninitializedObject(types[j]);
 
-                                    ModWrapper mw = new ModWrapper();
-                                    mw.ID = m.ID;
-                                    mw.Name = m.Name;
-                                    mw.Version = m.Version;
+                                        ModWrapper mw = new ModWrapper();
+                                        mw.ID = m.ID;
+                                        mw.Name = m.Name;
+                                        mw.Version = m.Version;
 
-                                    ModInstances.Add(mw);
+                                        ModInstances.Add(mw);
+                                    }
+                                    catch (Exception exx)
+                                    {
+                                        MessageBox.Show($"{types[j].FullName} assembly does not support autoupdating. The mod may require a manual update before being able to update itself.\n\nError: {exx.Message}");
+                                    }
                                 }
                             }
                         }
@@ -83,14 +91,21 @@ namespace MyGarage_Autoupdater_Client
                                 {
                                     if (modType.IsAssignableFrom(types[j]))
                                     {
-                                        Mod m = (Mod)FormatterServices.GetUninitializedObject(types[j]);
-                                        
-                                        ModWrapper mw = new ModWrapper();
-                                        mw.ID = m.ID;
-                                        mw.Name = m.Name;
-                                        mw.Version = m.Version;
+                                        try
+                                        {
+                                            Mod m = (Mod)FormatterServices.GetUninitializedObject(types[j]);
 
-                                        ModInstances.Add(mw);
+                                            ModWrapper mw = new ModWrapper();
+                                            mw.ID = m.ID;
+                                            mw.Name = m.Name;
+                                            mw.Version = m.Version;
+
+                                            ModInstances.Add(mw);
+                                        }
+                                        catch(Exception exx)
+                                        {
+                                            MessageBox.Show($"{types[j].FullName} assembly does not support autoupdating. The mod may require a manual update before being able to update itself.\n\nError: {exx.Message}");
+                                        }
                                     }
                                 }
                             }
@@ -182,7 +197,8 @@ namespace MyGarage_Autoupdater_Client
                 try
                 {
                     client.DownloadFileAsync(new Uri(dd.Mod_Url), internalDownloadsFolder + $"\\{dd.File_Name}");
-                } catch(Exception ex)
+                } 
+                catch(Exception ex)
                 {
                     MessageBox.Show($"{dd.Mod_Name} has an invalid download link. Error: {ex.Message}");
                 }
@@ -190,8 +206,11 @@ namespace MyGarage_Autoupdater_Client
             }
 
             // Downloads have finished
-            // TODO: call helper here
-            Console.WriteLine("ready");
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName = autoupdaterFolderPath + "\\AutoupdaterHelper.exe";
+            startInfo.Arguments = "MODUPDATES";
+            Process.Start(startInfo);
+            System.Environment.Exit(0);
         }
 
         public void DownloadProgressChange(object sender, DownloadProgressChangedEventArgs e)
@@ -240,6 +259,12 @@ namespace MyGarage_Autoupdater_Client
 
             // Invoke the method on the object we passed and return the result.
             return method.Invoke(o, arguments);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Process.Start("steam://rungameid/1578390");
+            System.Environment.Exit(0);
         }
     }
 }

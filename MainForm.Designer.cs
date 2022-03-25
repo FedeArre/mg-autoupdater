@@ -40,7 +40,7 @@
             this.txt_status.Enabled = false;
             this.txt_status.Location = new System.Drawing.Point(113, 24);
             this.txt_status.Name = "txt_status";
-            this.txt_status.Size = new System.Drawing.Size(159, 20);
+            this.txt_status.Size = new System.Drawing.Size(225, 20);
             this.txt_status.TabIndex = 0;
             this.txt_status.Text = "Status has not changed yet";
             // 
@@ -55,7 +55,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(18, 66);
+            this.button1.Location = new System.Drawing.Point(12, 66);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(123, 23);
             this.button1.TabIndex = 2;
@@ -65,18 +65,19 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(199, 66);
+            this.button2.Location = new System.Drawing.Point(267, 66);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(102, 23);
             this.button2.TabIndex = 3;
             this.button2.Text = "Launch game";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(314, 100);
+            this.ClientSize = new System.Drawing.Size(381, 100);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);

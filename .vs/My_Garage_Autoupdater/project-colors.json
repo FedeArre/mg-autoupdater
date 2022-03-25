@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "46e6cd7e-6a19-4ff7-a10c-e69edf575976": {
+      "ProjectGuid": "46e6cd7e-6a19-4ff7-a10c-e69edf575976",
+      "DisplayName": "My_Garage_Autoupdater",
+      "ColorIndex": 0
+    },
+    "76f5b274-5415-4eab-bb60-2a0be377551e": {
+      "ProjectGuid": "76f5b274-5415-4eab-bb60-2a0be377551e",
+      "DisplayName": "AutoupdaterHelper",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}
