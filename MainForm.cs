@@ -12,18 +12,23 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
 using System.Diagnostics;
+using MyGarage_Autoupdater_Client.JSON_Objects;
 
 namespace MyGarage_Autoupdater_Client
 {
     public partial class MainForm : Form
     {
+        public static string CurrentVersion = "v1.0.0";
+        JSON_AutoupdaterData data;
+        bool updatingAutoupdater = false;
+
         public static string ModsFolderPath = AppContext.BaseDirectory + "..\\";
         public List<ModWrapper> ModInstances;
         public Queue<DownloadData> downloadLinksQueue;
         DownloadData currentDownloadingMod;
 
         string autoupdaterFolderPath = AppContext.BaseDirectory;
-
+        
         public MainForm()
         {
             ModInstances = new List<ModWrapper>();
@@ -31,6 +36,7 @@ namespace MyGarage_Autoupdater_Client
             if (!Directory.Exists(internalDownloadsFolder))
                 Directory.CreateDirectory(internalDownloadsFolder);
 
+            Logger.WriteLog("MainForm started");
             InitializeComponent();
         }
 
@@ -71,6 +77,7 @@ namespace MyGarage_Autoupdater_Client
                                     }
                                     catch (Exception exx)
                                     {
+                                        Logger.WriteLog($"Detected broken assembly ({types[j].FullName}), error: {exx.Message}");
                                         MessageBox.Show($"{types[j].FullName} assembly does not support autoupdating. The mod may require a manual update before being able to update itself.\n\nError: {exx.Message}");
                                     }
                                 }
@@ -104,6 +111,7 @@ namespace MyGarage_Autoupdater_Client
                                         }
                                         catch(Exception exx)
                                         {
+                                            Logger.WriteLog($"Detected broken assembly ({types[j].FullName}), error: {exx.Message}");
                                             MessageBox.Show($"{types[j].FullName} assembly does not support autoupdating. The mod may require a manual update before being able to update itself.\n\nError: {exx.Message}");
                                         }
                                     }
@@ -115,14 +123,84 @@ namespace MyGarage_Autoupdater_Client
             }
             catch (Exception ex)
             {
+                Logger.WriteLog("Fatal error occured on mod load: " + ex.Message);
                 MessageBox.Show("A fatal error occurred, please report this!\n" + ex.Message);
+            }
+
+            data = APIWrapper.Instance().GetAutoupdaterVersion();
+            if(data.current_version != CurrentVersion)
+            {
+                Logger.WriteLog($"Using outdated Autoupdater version ({CurrentVersion} - available {data.current_version})");
+                DialogResult confirmResult = MessageBox.Show($"An update is available for the autoupdater\n\nDo you want to install the update?", "Install", MessageBoxButtons.YesNo);
+                if (confirmResult == DialogResult.Yes)
+                {
+                    UpdateAutoupdater();
+                }
             }
 
             DoModCheck();
         }
 
+        // Autoupdater updating
+        public void UpdateAutoupdater()
+        {
+            string internalDownloadsFolder = autoupdaterFolderPath + "\\temp_downloads";
+            if (!Directory.Exists(internalDownloadsFolder))
+                Directory.CreateDirectory(internalDownloadsFolder);
+
+            WebClient client = new WebClient();
+            client.DownloadProgressChanged += OnAutoupdaterUpdateProgress;
+            client.DownloadFileCompleted += OnAutoupdaterUpdateFinish;
+
+            try
+            {
+                client.DownloadFileAsync(new Uri(data.download_link), internalDownloadsFolder + $"\\Autoupdater.exe");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Autoupdater has an invalid download link. Error: {ex.Message}");
+            }
+            updatingAutoupdater = true;
+        }
+
+        public void OnAutoupdaterUpdateProgress(object sender, DownloadProgressChangedEventArgs e)
+        {
+            double bytesIn = double.Parse(e.BytesReceived.ToString());
+            double totalBytes = double.Parse(e.TotalBytesToReceive.ToString());
+            double percentage = bytesIn / totalBytes * 100;
+            int val = int.Parse(Math.Truncate(percentage).ToString());
+            if (currentDownloadingMod != null)
+                txt_status.Text = $"Downloading update - {val}%";
+        }
+
+        public void OnAutoupdaterUpdateFinish(object sender, AsyncCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                MessageBox.Show("An error ocurred while downloading the file, if this happens again report this!\n\nError: " + e.Error.Message);
+                return;
+            }
+
+            if (e.Cancelled)
+            {
+                MessageBox.Show("The current download has been cancelled");
+            }
+
+            // Downloads have finished
+            Logger.WriteLog("Opening helper with UPDATER tag.");
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName = autoupdaterFolderPath + "\\AutoupdaterHelper.exe";
+            startInfo.Arguments = "UPDATER";
+            Process.Start(startInfo);
+            System.Environment.Exit(0);
+        }
+
+        // Mod updating
         public void DoModCheck()
         {
+            if (updatingAutoupdater)
+                return;
+
             var updates = APIWrapper.Instance().GetUpdates(ModInstances);
 
             if(updates == null)
@@ -131,6 +209,8 @@ namespace MyGarage_Autoupdater_Client
                 txt_status.Text = "Something went wrong";
                 return;
             }
+            
+            Logger.WriteLog("Updates found: " + updates.Count);
 
             if (updates.Count == 0)
                 txt_status.Text = "All mods are up to date";
@@ -150,6 +230,7 @@ namespace MyGarage_Autoupdater_Client
                 DialogResult confirmResult = MessageBox.Show($"Updates available for the following mod(s): {list}\n\nDo you want to install them?", "Install", MessageBoxButtons.YesNo);
                 if (confirmResult == DialogResult.Yes)
                 {
+                    Logger.WriteLog("Starting to download updates");
                     DownloadUpdates();
                 }
             }
@@ -197,15 +278,18 @@ namespace MyGarage_Autoupdater_Client
                 try
                 {
                     client.DownloadFileAsync(new Uri(dd.Mod_Url), internalDownloadsFolder + $"\\{dd.File_Name}");
+                    Logger.WriteLog($"Now downloading: " + dd.Mod_Name);
                 } 
                 catch(Exception ex)
                 {
+                    Logger.WriteLog($"Error trying to download a mod, error: " + ex.Message);
                     MessageBox.Show($"{dd.Mod_Name} has an invalid download link. Error: {ex.Message}");
                 }
                 return;
             }
 
             // Downloads have finished
+            Logger.WriteLog("Opening helper with MODUPDATES tag.");
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = autoupdaterFolderPath + "\\AutoupdaterHelper.exe";
             startInfo.Arguments = "MODUPDATES";
@@ -227,12 +311,14 @@ namespace MyGarage_Autoupdater_Client
         {
             if(e.Error != null)
             {
+                Logger.WriteLog($"Error on mod download finish, error: " + e.Error.ToString());
                 MessageBox.Show("An error ocurred while downloading the file, if this happens again report this!\n\nError: " + e.Error.Message);
                 return;
             }
 
             if(e.Cancelled)
             {
+                Logger.WriteLog($"Mod download was cancelled");
                 MessageBox.Show("The current download has been cancelled");
             }
 
@@ -265,6 +351,16 @@ namespace MyGarage_Autoupdater_Client
         {
             Process.Start("steam://rungameid/1578390");
             System.Environment.Exit(0);
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"My Garage Autoupdater\nVersion: {CurrentVersion}\n\nDeveloped by Federico Arredondo", "About");
+        }
+
+        public static void ShowError(string message)
+        {
+            MessageBox.Show(message, "Error");
         }
     }
 }

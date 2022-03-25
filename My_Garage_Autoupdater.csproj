@@ -56,9 +56,11 @@
   <ItemGroup>
     <Compile Include="APIWrapper.cs" />
     <Compile Include="DownloadData.cs" />
+    <Compile Include="JSON_Objects\JSON_AutoupdaterData.cs" />
     <Compile Include="JSON_Objects\JSON_Mod.cs" />
     <Compile Include="JSON_Objects\JSON_ModList.cs" />
     <Compile Include="JSON_Objects\JSON_Mod_API_Result.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

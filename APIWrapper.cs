@@ -14,13 +14,12 @@ namespace MyGarage_Autoupdater_Client
     internal class APIWrapper
     {
         private static APIWrapper instance;
-        private static readonly HttpClient client = new HttpClient();
 
         public const string API_URL = "http://localhost:3000";
 
         private APIWrapper()
         {
-
+            Logger.WriteLog("API Wrapper started, using URL " + API_URL);
         }
 
         public static APIWrapper Instance()
@@ -67,6 +66,8 @@ namespace MyGarage_Autoupdater_Client
             }
             catch(Exception ex)
             {
+                Logger.WriteLog("Error ocurred on GetUpdates, error: " + ex.ToString());
+                MainForm.ShowError("Error while trying to get the updates. Information available on the log.");
                 return null;
             }
         }
@@ -99,12 +100,39 @@ namespace MyGarage_Autoupdater_Client
                 } 
                 catch(Exception ex)
                 {
-                    Console.Write("a");
-                    // TODO: Logger
+                    Logger.WriteLog("Error ocurred on GetDownloadLinks, error: " + ex.ToString());
+                    MainForm.ShowError("Error while trying to get download links. Information available on the log.");
                 }
             }
 
             return links;
+        }
+
+        public JSON_AutoupdaterData GetAutoupdaterVersion()
+        {
+            try
+            {
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(API_URL + "/autoupdater");
+                httpWebRequest.ContentType = "application/json";
+
+                using(HttpWebResponse response = (HttpWebResponse)httpWebRequest.GetResponse())
+                {
+                    using (Stream stream = response.GetResponseStream())
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        string json = reader.ReadToEnd();
+                        JSON_AutoupdaterData jsonObject = JsonConvert.DeserializeObject<JSON_AutoupdaterData>(json);
+
+                        return jsonObject;
+                    }
+                }
+            } 
+            catch(Exception ex)
+            {
+                Logger.WriteLog("Error ocurred on GetAutoupdaterVersion, error: " +ex.ToString());
+                MainForm.ShowError("Error while trying to get the autoupdater version. Information available on the log.");
+                return null;
+            }
         }
     }
 }

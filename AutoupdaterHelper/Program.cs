@@ -12,7 +12,7 @@ namespace AutoupdaterHelper
     {
         static void Main(string[] args)
         {
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(1500);
             if (args.Length == 0)
             {
                 System.Environment.Exit(0);
@@ -42,7 +42,6 @@ namespace AutoupdaterHelper
             if(args[0] == "UPDATER")
             {
                 string file = Path.Combine(downloadsFolder, "Autoupdater.exe");
-
                 if (File.Exists(file))
                 {
                     string destFile = Path.Combine(currentPath, "Autoupdater.exe");
@@ -53,6 +52,7 @@ namespace AutoupdaterHelper
 
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = currentPath + "\\Autoupdater.exe";
+            startInfo.Arguments = "log_restart_disable";
             Process.Start(startInfo);
         }
     }
