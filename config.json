@@ -1,4 +1,7 @@
 {
     "clientId": "955435876123557939",
-    "guildId": "955434195419824158"
+    "guildId": "955434195419824158",
+
+    "modUploadRoleId": "955434334838472804",
+    "autoupdaterManagerRoleId": "956736236792471554"
 }

@@ -57,7 +57,7 @@ db.updateMod = function(modId, newVersion, newDownloadLink){
 		connection.query("UPDATE mods SET current_version = ?, current_download_link = ? WHERE mod_id = ?", [newVersion, newDownloadLink, modId], function(error, result){
 			if(!error)
 			{
-				resolve(result);
+				resolve(true);
 			}
 			else
 			{
@@ -73,6 +73,22 @@ db.updateModDownloads = function(internal_mod_id, newVersion){
 			if(!error)
 			{
 				resolve(result);
+			}
+			else
+			{
+				reject(error);
+			}
+		});
+	});
+}
+
+db.doesModVersionExist = function(internal_mod_id, version){
+	return new Promise((resolve, reject) => {
+		connection.query("SELECT * FROM mods_download WHERE mod_id = ? AND version = ?", [internal_mod_id, version], function(error, result){
+			if(!error)
+			{
+				result = JSON.parse(JSON.stringify(result));
+				resolve(result[0]);
 			}
 			else
 			{

@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { getModData, addNewMod } = require('../backend/database');
+const { modUploadRoleId } = require("../config.json");
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -13,6 +14,11 @@ module.exports = {
 
 	async execute(interaction) {
         await interaction.deferReply();
+        
+        if (!interaction.member.roles.cache.some(role => role.id == modUploadRoleId)) {
+            interaction.editReply("No permission!");
+            return; 
+        }
 
         let mod_id = interaction.options.getString("mod_id");
         let tempData = await getModData(mod_id);
