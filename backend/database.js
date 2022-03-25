@@ -1,3 +1,4 @@
+const res = require('express/lib/response');
 const mysql = require('mysql');
 
 let connection = null;
@@ -45,6 +46,21 @@ db.doesModExist = function(modId){
 				resolve(result);
 			} 
 			else 
+			{
+				reject(error);
+			}
+		});
+	});
+}
+
+db.updateAutoupdater = function(newVersion, newDownloadLink){
+	return new Promise((resolve, reject) => {
+		connection.query("UPDATE autoupdater_information SET current_version = ?, download_link = ?, download_counter = 0", [newVersion, newDownloadLink], function(error, result){
+			if(!error)
+			{
+				resolve(true);
+			}
+			else
 			{
 				reject(error);
 			}
@@ -147,4 +163,23 @@ db.getAutoupdaterData = function(){
 		});
 	});
 }
+
+db.log = function(type, triggered_by, info){
+	return new Promise((resolve, reject) => {
+		connection.query("INSERT INTO logs (log_type, log_triggered_by, log_extra) VALUES (?, ?, ?)", [type, triggered_by, info], function(error, result){
+			if(error)
+			{
+				console.log("Error while updating download counter.");
+				console.log(error);
+				reject(error);
+			}
+			else
+			{
+				resolve(result);
+			}
+
+		});
+	});
+}
+
 module.exports = db;

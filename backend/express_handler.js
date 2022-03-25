@@ -27,14 +27,15 @@ app.post('/mods', async(request, response) => {
             if(data === undefined)
                 continue;
     
-        
             if(data["current_version"] != modList["mods"][i]["version"])
             {
                 modsRequiringUpdate.push(data);
             }
         }
 
-        telemetryHello();
+        if(modList["telemetry"] == true)
+            telemetryHello();
+        
         response.send(modsRequiringUpdate);
     }
 
