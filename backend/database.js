@@ -116,4 +116,19 @@ db.updateDownloadCounter = function(internal_mod_id, current_version) {
 	});
 }
 
+db.getAutoupdaterData = function(){
+	return new Promise((resolve, reject) => {
+		connection.query("SELECT * FROM autoupdater_information LIMIT 1", function(error, result){
+			if(error){
+				console.log("Error while updating download counter.");
+				console.log(error);
+				reject(error);
+			}
+			else {
+				result = JSON.parse(JSON.stringify(result));
+				resolve(result);
+			}
+		});
+	});
+}
 module.exports = db;

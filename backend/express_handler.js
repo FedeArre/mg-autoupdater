@@ -1,6 +1,6 @@
 const express = require('express');
 const api = require('./api');
-const { getModData, telemetryHello, updateDownloadCounter } = require('./database');
+const { getModData, telemetryHello, updateDownloadCounter, getAutoupdaterData } = require('./database');
 const rateLimit = require("express-rate-limit");
 
 // Basic setup
@@ -46,7 +46,6 @@ app.post('/mods', async(request, response) => {
 });
 
 app.post("/mod_download", async(request, response) => {
-    console.log(request.body);
     let mod = request.body;
     if(mod === undefined || mod["mod_id"] === undefined){
         response.sendStatus(400);
@@ -64,6 +63,22 @@ app.post("/mod_download", async(request, response) => {
         response.send(data["current_download_link"]);
     } catch(error){
         console.log("An issue ocurred on /mod_download API.");
+        console.log(error);
+        response.sendStatus(500);
+    }
+});
+
+app.get("/autoupdater", async(request, response) => {
+    try
+    {
+        let data = await getAutoupdaterData();
+        let returnData = new Object();
+        returnData["current_version"] = data[0]["current_version"];
+        returnData["download_link"] = data[0]["download_link"];
+        response.send(returnData);
+    }
+    catch(error) {
+        console.log("An issue ocurred on /autoupdater API.");
         console.log(error);
         response.sendStatus(500);
     }
