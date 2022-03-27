@@ -1,0 +1,10 @@
+C:\Users\Federico\source\repos\Autoupdater\bin\Debug\Autoupdater.dll
+C:\Users\Federico\source\repos\Autoupdater\bin\Debug\Autoupdater.pdb
+C:\Users\Federico\source\repos\Autoupdater\obj\Debug\Autoupdater.csproj.AssemblyReference.cache
+C:\Users\Federico\source\repos\Autoupdater\obj\Debug\Autoupdater.csproj.CoreCompileInputs.cache
+C:\Users\Federico\source\repos\Autoupdater\obj\Debug\Autoupdater.dll
+C:\Users\Federico\source\repos\Autoupdater\obj\Debug\Autoupdater.pdb
+F:\SteamLibrary\steamapps\common\My Garage\Mods\Autoupdater.dll
+F:\SteamLibrary\steamapps\common\My Garage\Mods\Autoupdater.pdb
+C:\Users\Federico\source\repos\Autoupdater\obj\Debug\Autoupdater.Properties.Resources.resources
+C:\Users\Federico\source\repos\Autoupdater\obj\Debug\Autoupdater.csproj.GenerateResource.cache
