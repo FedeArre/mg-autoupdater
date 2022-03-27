@@ -50,8 +50,6 @@ namespace MyGarage_Autoupdater_Client
                 Array.Sort(files, StringComparer.InvariantCulture);
                 Assembly asm;
 
-                Console.WriteLine(autoupdaterFolderPath);
-                Console.WriteLine(ModsFolderPath);
                 for (int i = 0; i < files.Length; i++)
                 {
                     try
@@ -78,7 +76,7 @@ namespace MyGarage_Autoupdater_Client
                                     catch (Exception exx)
                                     {
                                         Logger.WriteLog($"Detected broken assembly ({types[j].FullName}), error: {exx.Message}");
-                                        MessageBox.Show($"{types[j].FullName} assembly does not support autoupdating. The mod may require a manual update before being able to update itself.\n\nError: {exx.Message}");
+                                        MessageBox.Show($"{types[j].FullName} assembly does not support autoupdating. The mod may require a manual update before being able to update itself.\n\nCheck if there are updates available for the mod before reporting this as an issue!");
                                     }
                                 }
                             }
@@ -112,7 +110,7 @@ namespace MyGarage_Autoupdater_Client
                                         catch(Exception exx)
                                         {
                                             Logger.WriteLog($"Detected broken assembly ({types[j].FullName}), error: {exx.Message}");
-                                            MessageBox.Show($"{types[j].FullName} assembly does not support autoupdating. The mod may require a manual update before being able to update itself.\n\nError: {exx.Message}");
+                                            MessageBox.Show($"{types[j].FullName} assembly does not support autoupdating. The mod may require a manual update before being able to update itself.\n\nCheck if there are updates available for the mod before reporting this as an issue!");
                                         }
                                     }
                                 }
@@ -127,6 +125,13 @@ namespace MyGarage_Autoupdater_Client
                 MessageBox.Show("A fatal error occurred, please report this!\n" + ex.Message);
             }
 
+            string temp = "Loaded mod list: \n";
+            foreach (ModWrapper mw in ModInstances)
+            {
+                temp += $"{mw.ID} - {mw.Version}\n";
+            }
+
+            Logger.WriteLog(temp);
             data = APIWrapper.Instance().GetAutoupdaterVersion();
             if(data.current_version != CurrentVersion)
             {
@@ -158,6 +163,7 @@ namespace MyGarage_Autoupdater_Client
             }
             catch (Exception ex)
             {
+                Logger.WriteLog($"Error occurred with autoupdater download link: {ex.Message}");
                 MessageBox.Show($"Autoupdater has an invalid download link. Error: {ex.Message}");
             }
             updatingAutoupdater = true;
@@ -177,12 +183,14 @@ namespace MyGarage_Autoupdater_Client
         {
             if (e.Error != null)
             {
+                Logger.WriteLog($"Error occured on Autoupdater download finish, log: " + e.Error.Message);
                 MessageBox.Show("An error ocurred while downloading the file, if this happens again report this!\n\nError: " + e.Error.Message);
                 return;
             }
 
             if (e.Cancelled)
             {
+                Logger.WriteLog($"Autoupdater download got cancelled");
                 MessageBox.Show("The current download has been cancelled");
             }
 
@@ -202,6 +210,14 @@ namespace MyGarage_Autoupdater_Client
                 return;
 
             var updates = APIWrapper.Instance().GetUpdates(ModInstances);
+            
+            Timer timer = new Timer
+            {
+                Interval = 3000
+            };
+
+            timer.Enabled = true;
+            timer.Tick += new System.EventHandler(OnTimerEvent);
 
             if(updates == null)
             {
@@ -226,6 +242,7 @@ namespace MyGarage_Autoupdater_Client
                 }
 
                 list = list.Remove(list.Length - 2);
+                Logger.WriteLog($"Available updates: " + list);
 
                 DialogResult confirmResult = MessageBox.Show($"Updates available for the following mod(s): {list}\n\nDo you want to install them?", "Install", MessageBoxButtons.YesNo);
                 if (confirmResult == DialogResult.Yes)
@@ -235,10 +252,16 @@ namespace MyGarage_Autoupdater_Client
                 }
             }
         }
-        
+        public void OnTimerEvent(object source, EventArgs e)
+        {
+            button1.Enabled = true;
+            ((Timer)source).Enabled = false;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             txt_status.Text = "Checking";
+            button1.Enabled = false;
             DoModCheck();
         }
 

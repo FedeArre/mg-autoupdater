@@ -1,8 +1,8 @@
 F:\SteamLibrary\steamapps\common\My Garage\Mods\Autoupdater\AutoupdaterHelper.exe.config
 F:\SteamLibrary\steamapps\common\My Garage\Mods\Autoupdater\AutoupdaterHelper.exe
 F:\SteamLibrary\steamapps\common\My Garage\Mods\Autoupdater\AutoupdaterHelper.pdb
-F:\Programacion My Garage\New docs\mg-autoupdater\AutoupdaterHelper\obj\Debug\AutoupdaterHelper.csproj.AssemblyReference.cache
 F:\Programacion My Garage\New docs\mg-autoupdater\AutoupdaterHelper\obj\Debug\AutoupdaterHelper.csproj.SuggestedBindingRedirects.cache
 F:\Programacion My Garage\New docs\mg-autoupdater\AutoupdaterHelper\obj\Debug\AutoupdaterHelper.csproj.CoreCompileInputs.cache
 F:\Programacion My Garage\New docs\mg-autoupdater\AutoupdaterHelper\obj\Debug\AutoupdaterHelper.exe
 F:\Programacion My Garage\New docs\mg-autoupdater\AutoupdaterHelper\obj\Debug\AutoupdaterHelper.pdb
+F:\Programacion My Garage\New docs\mg-autoupdater\AutoupdaterHelper\obj\Debug\AutoupdaterHelper.csproj.AssemblyReference.cache

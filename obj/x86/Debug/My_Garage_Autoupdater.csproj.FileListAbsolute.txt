@@ -1,4 +1,3 @@
-F:\Programacion My Garage\New docs\mg-autoupdater\obj\x86\Debug\My_Garage_Autoupdater.csproj.AssemblyReference.cache
 F:\Programacion My Garage\New docs\mg-autoupdater\obj\x86\Debug\MyGarage_Autoupdater_Client.MainForm.resources
 F:\Programacion My Garage\New docs\mg-autoupdater\obj\x86\Debug\My_Garage_Autoupdater.Properties.Resources.resources
 F:\Programacion My Garage\New docs\mg-autoupdater\obj\x86\Debug\My_Garage_Autoupdater.csproj.GenerateResource.cache
@@ -15,3 +14,4 @@ F:\SteamLibrary\steamapps\common\My Garage\Mods\Autoupdater\Autoupdater.exe
 F:\SteamLibrary\steamapps\common\My Garage\Mods\Autoupdater\Autoupdater.pdb
 F:\Programacion My Garage\New docs\mg-autoupdater\obj\x86\Debug\Autoupdater.exe
 F:\Programacion My Garage\New docs\mg-autoupdater\obj\x86\Debug\Autoupdater.pdb
+F:\Programacion My Garage\New docs\mg-autoupdater\obj\x86\Debug\My_Garage_Autoupdater.csproj.AssemblyReference.cache

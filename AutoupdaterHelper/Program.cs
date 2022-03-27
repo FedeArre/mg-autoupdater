@@ -19,6 +19,11 @@ namespace AutoupdaterHelper
                 return;
             }
 
+            foreach (var process in Process.GetProcessesByName("My Garage"))
+            {
+                process.Kill();
+            }
+
             string currentPath = AppContext.BaseDirectory;
             string modsFolder = currentPath + "..\\";
             string downloadsFolder = currentPath + "temp_downloads\\";

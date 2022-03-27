@@ -15,7 +15,7 @@ namespace MyGarage_Autoupdater_Client
     {
         private static APIWrapper instance;
 
-        public const string API_URL = "http://localhost:3000";
+        public const string API_URL = "https://mygaragemod.xyz";
 
         private APIWrapper()
         {
