@@ -1,1 +1,1 @@
-This project is not longer being maintained since it has been replaced by a new backend written on C# ([AutoupdaterBackend repository](https://github.com/FedeArre/AutoupdaterBackend))
+This project is not longer being maintained since it has been replaced by a new backend written on C# ([AutoupdaterBackend repository](https://github.com/FedeArre/AutoupdaterBackend)) and the client and mod are now merged with ModUtils.
